@@ -4,7 +4,7 @@ import { commonStyles } from "../styles/commonStyles";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 
-const API = "http://ritatony.pythonanywhere.com/";
+const API = "http://ritatony.pythonanywhere.com";
 const API_WHOAMI = "/whoami";
 
 

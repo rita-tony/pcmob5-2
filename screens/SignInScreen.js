@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import {
+  Button,
   View,
   Text,
   TextInput,
@@ -13,7 +14,7 @@ import {
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 
-const API = "http://ritatony.pythonanywhere.com/";
+const API = "http://ritatony.pythonanywhere.com";
 const API_LOGIN = "/auth";
 
 export default function SignInScreen({ navigation }) {
@@ -37,6 +38,9 @@ export default function SignInScreen({ navigation }) {
 
       await AsyncStorage.setItem("token", response.data.access_token);
       setLoading(false);
+      setUsername("");
+      setPassword("");
+      setErrorText("");
       navigation.navigate("Account");
     } catch (error) {
       setLoading(false);
@@ -44,6 +48,14 @@ export default function SignInScreen({ navigation }) {
       console.log(error.response);
       setErrorText(error.response.data.description);
     }
+  }
+
+  function signUp()
+  {
+    console.log("---- Sign Up ----");
+    Keyboard.dismiss();
+
+    navigation.navigate("SignUp");
   }
 
   return (
@@ -77,6 +89,7 @@ export default function SignInScreen({ navigation }) {
           ) : null }
         </View>
         <Text style={styles.errorText}>{errorText}</Text>
+        <Button title="Register for a new account" onPress={signUp} />
         <View style={{ height: 20, alignItems: "left" }}></View>
       </View>
     </TouchableWithoutFeedback>
